@@ -1,17 +1,21 @@
 // src/components/FilterBox.js
-import React from 'react';
+import React, { useState } from 'react';
 
 function FilterBox({ setFilter }) {
+  const [searchText, setSearchText] = useState('');
+
   const handleFilterChange = (e) => {
+    setSearchText(e.target.value);
     setFilter(e.target.value);
   };
 
   return (
-    <select onChange={handleFilterChange}>
-      <option value="All">All</option>
-      <option value="Processing">Processing</option>
-      <option value="Done">Done</option>
-    </select>
+    <input
+      type="text"
+      value={searchText}
+      onChange={handleFilterChange}
+      placeholder="Search..."
+    />
   );
 }
 

@@ -7,7 +7,8 @@ import Tabs from './Tabs';
 
 function App() {
   const [todos, setTodos] = useState([]);
-  const [filter, setFilter] = useState('All');
+  const [tabFilter, setTabFilter] = useState('All');
+  const [searchFilter, setSearchFilter] = useState('');
 
   return (
     <div className="App">
@@ -18,9 +19,14 @@ function App() {
         </>
       ) : (
         <>
-          <FilterBox setFilter={setFilter} />
-          <Tabs filter={filter} setFilter={setFilter} />
-          <TodoList todos={todos} setTodos={setTodos} filter={filter} />
+          <FilterBox setFilter={setSearchFilter} />
+          <Tabs filter={tabFilter} setFilter={setTabFilter} />
+          <TodoList
+            todos={todos}
+            setTodos={setTodos}
+            tabFilter={tabFilter}
+            searchFilter={searchFilter}
+          />
           <InputBox setTodos={setTodos} />
         </>
       )}

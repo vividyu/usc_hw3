@@ -16,8 +16,18 @@ function TodoItem({ todo, todos, setTodos }) {
     );
   };
 
+  const toggleDone = () => {
+    setTodos(
+      todos.map((t) =>
+        t.id === todo.id ? { ...t, done: !t.done } : t
+      )
+    );
+  };
+
   const editTodo = () => {
-    setIsEditing(true);
+    if (!todo.done) {
+      setIsEditing(true);
+    }
   };
 
   const saveTodo = () => {
@@ -40,15 +50,20 @@ function TodoItem({ todo, todos, setTodos }) {
         onChange={updatePriority}
         min="1"
       />
-      {isEditing ? (
-        <input
-          type="text"
-          value={editedText}
-          onChange={(e) => setEditedText(e.target.value)}
-        />
-      ) : (
-        <span>{todo.text}</span>
-      )}
+      <span
+        onClick={toggleDone}
+        style={todo.done ? { textDecoration: 'line-through' } : {}}
+      >
+        {isEditing ? (
+          <input
+            type="text"
+            value={editedText}
+            onChange={(e) => setEditedText(e.target.value)}
+          />
+        ) : (
+          todo.text
+        )}
+      </span>
       {isEditing ? (
         <>
           <button onClick={cancelEdit}>Cancel</button>
@@ -56,7 +71,9 @@ function TodoItem({ todo, todos, setTodos }) {
         </>
       ) : (
         <>
-          <button onClick={editTodo}>Edit</button>
+          <button onClick={editTodo} disabled={todo.done}>
+            Edit
+          </button>
           <button onClick={deleteTodo}>Delete</button>
         </>
       )}
