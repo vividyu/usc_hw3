@@ -20,13 +20,13 @@ function App() {
       ) : (
         <>
           <FilterBox setFilter={setSearchFilter} />
-          <Tabs filter={tabFilter} setFilter={setTabFilter} />
           <TodoList
             todos={todos}
             setTodos={setTodos}
             tabFilter={tabFilter}
             searchFilter={searchFilter}
           />
+          <Tabs filter={tabFilter} setFilter={setTabFilter} />
           <InputBox setTodos={setTodos} />
         </>
       )}
